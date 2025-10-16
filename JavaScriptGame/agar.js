@@ -81,7 +81,7 @@ function spawnCollectable(scene) {
   const randomx = Phaser.Math.Between(0, scene.sys.game.config.width);
   const randomy = Phaser.Math.Between(0, scene.sys.game.config.height);
 
-  const ball = scene.collectables.create(randomx, randomy, 'player');
-  ball.setScale(0.05); // kleiner dan speler
-  ball.setTint(Phaser.Display.Color.RandomRGB(100, 255).color); //Geef food collectables een random kleur
+  const food = scene.collectables.create(randomx, randomy, 'food');
+  food.setScale(0.05); // kleiner dan speler
+  food.setTint(Phaser.Display.Color.RandomRGB(100, 255).color); //Geef food collectables een random kleur
 }
