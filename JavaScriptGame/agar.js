@@ -55,3 +55,12 @@ function update() {
     player.y += differencey * 0.1 * speed * (1 / distance);
   }
 }
+
+function spawnCollectable(scene) {
+  const randomx = Phaser.Math.Between(0, scene.sys.game.config.width);
+  const randomy = Phaser.Math.Between(0, scene.sys.game.config.height);
+
+  const food = scene.collectables.create(randomx, randomy, 'food');
+  food.setScale(0.05); // kleiner dan speler
+  food.setTint(Phaser.Display.Color.RandomRGB(100, 255).color); //Geef food collectables een random kleur
+}
