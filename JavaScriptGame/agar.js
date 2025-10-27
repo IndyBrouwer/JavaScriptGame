@@ -56,8 +56,8 @@ function create() {
     loop: true
   });
 
-  //Spawn obstacles (nu 3)
-  for (let i = 0; i < 3; i++) {
+  //Spawn obstacles (nu 4)
+  for (let i = 0; i < 4; i++) {
     spawnObstacle(this);
   }
 
@@ -112,27 +112,39 @@ function spawnCollectable(scene) {
 }
 
 function spawnObstacle(scene) {
-  const safeZoneRadius = 100; //Straal ron speler waar geen obstakels mogen spawnen
-  const minDistanceBetweenObstacles = 60; //Minimale afstand tussen obstakels
+  const safeZoneRadius = 250; //Straal ron speler waar geen obstakels mogen spawnen
+  const minDistanceBetweenObstacles = 200; //Minimale afstand tussen obstakels
 
   //Set wat de center is voor beide assen
   const centerX = scene.sys.game.config.width / 2;
   const centerY = scene.sys.game.config.height / 2;
 
-  let randomx, randomy;
-  let distanceToCenter;
+  let randomx, randomy, validPosition = false;
 
-  do {
+  //Probeer tot we een geldige positie vinden (max 50 pogingen om vastlopen te voorkomen)
+  for (let attempts = 0; attempts < 50 && !validPosition; attempts++) {
     randomx = Phaser.Math.Between(50, scene.sys.game.config.width - 50);
     randomy = Phaser.Math.Between(50, scene.sys.game.config.height - 50);
-    distanceToCenter = Phaser.Math.Distance.Between(randomx, randomy, centerX, centerY);
-  } while (distanceToCenter < safeZoneRadius); //Probeer opnieuw tot obstakel buiten veilige zone ligt
 
-  const obstacle = scene.obstacles.create(randomx, randomy, 'obstacle');
+    const distanceToCenter = Phaser.Math.Distance.Between(randomx, randomy, centerX, centerY);
+    if (distanceToCenter < safeZoneRadius) continue; // te dicht bij speler
 
-  obstacle.setScale(0.3);
-  obstacle.setCircle(260, 20, 20);
-  obstacle.setImmovable(true);
+    //Check of het niet te dicht bij een bestaand obstakel is
+    let tooClose = false;
+    scene.obstacles.getChildren().forEach(obstacle => {
+      const obstacleDistance = Phaser.Math.Distance.Between(randomx, randomy, obstacle.x, obstacle.y);
+      if (obstacleDistance < minDistanceBetweenObstacles) tooClose = true;
+    });
+
+    if (!tooClose) validPosition = true;
+  }
+
+  if (validPosition){
+    const obstacle = scene.obstacles.create(randomx, randomy, 'obstacle');
+    obstacle.setScale(0.3);
+    obstacle.setCircle(260, 20, 20);
+    obstacle.setImmovable(true);
+  }
 }
 
 function gameOver(scene) {
