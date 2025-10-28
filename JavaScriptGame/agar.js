@@ -5,7 +5,7 @@ const config = {
   backgroundColor: '#222',
   physics: {
     default: 'arcade',
-    arcade: { debug: true }
+    arcade: { debug: false }
   },
   scene: {
     preload: preload,
@@ -82,7 +82,7 @@ function create() {
 }
 
 function update() {
-  //Als gameo over actief is, vermijd beweging.
+  //Als game over actief is, vermijd beweging.
   if (gameOverText) {
     return;
   }
@@ -102,11 +102,15 @@ function update() {
 }
 
 function spawnCollectable(scene) {
+  if (gameOverText){
+    return;
+  }
+
   const randomx = Phaser.Math.Between(0, scene.sys.game.config.width);
   const randomy = Phaser.Math.Between(0, scene.sys.game.config.height);
 
   const food = scene.collectables.create(randomx, randomy, 'food');
-  food.setScale(0.05); //Verklein de collectables erg vanwege de asset die zo groot is en de player hun size. 
+  food.setScale(0.05); //Verklein de collectables (erg) vanwege de asset die zo groot is en de player hun verkleinde size. 
   food.setCircle(food.width / 2);
   food.setTint(Phaser.Display.Color.RandomRGB(100, 255).color); //Geef food collectables een random kleur
 }
