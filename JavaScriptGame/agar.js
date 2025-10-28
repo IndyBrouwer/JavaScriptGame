@@ -29,11 +29,29 @@ const game = new Phaser.Game(config);
 
 function preload(){
   this.load.image('player', 'assets/WhiteCircle.png');
-  this.load.image('food', 'assets/WhiteCircle.png')
-  this.load.image('obstacle', 'assets/SpikyCircle.png')
+  this.load.image('food', 'assets/WhiteCircle.png');
+  this.load.image('obstacle', 'assets/SpikyCircle.png');
+  this.load.image('background', 'assets/Background.jpg');
+
+  this.load.audio('consume', 'assets/sounds/FoodConsume.wav');
+  this.load.audio('hit', 'assets/sounds/PlayerHit.wav');
+  this.load.audio('music', 'assets/sounds/SewerCity.wav');
 }
 
 function create() {
+  this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, 'background')
+      .setOrigin(0);
+
+  this.background.setTint(0x555555);
+
+  //Add sounds
+  this.consumeSound = this.sound.add('consume', { volume: 1 });
+  this.hitSound = this.sound.add('hit', { volume: 1 });
+  this.loopMusic = this.sound.add('music', { volume: 0.5, loop: true })
+
+  //Start looping background music
+  this.loopMusic.play();
+  
   //Add player in the middle of screen
   player = this.physics.add.image(640, 360, 'player');
 
@@ -42,10 +60,10 @@ function create() {
   player.setCircle(player.width / 2);
 
 
-  //Voeg groep toe voor collectables
+  //Add group for collectables
   this.collectables = this.physics.add.group();
 
-  //Voeg groep toe voor obstakels
+  //Add group for obstacles
   this.obstacles = this.physics.add.group();
 
 
@@ -56,22 +74,25 @@ function create() {
     loop: true
   });
 
-  //Spawn obstacles (nu 4)
+  //Spawn obstacles (4 as of now)
   for (let i = 0; i < 4; i++) {
     spawnObstacle(this);
   }
 
-  //Overlap met consumables
+  //Overlap with consumables
   this.physics.add.overlap(player, this.collectables, (player, collectable) => {
-    //Verwijder food item
+    //Remove food item
     collectable.destroy();
 
-    //Vergroot de speler een klein beetje op iedere consume
+    //Play eat sound
+    this.consumeSound.play();
+
+    //Increase player slightly on every consume
     player.setScale(player.scale + 0.005);
   });
 
 
-  //Overlap met obstakels
+  //Overlap with obstacles
   this.physics.add.overlap(player, this.obstacles, () => {
     gameOver(this);
   });
@@ -82,7 +103,7 @@ function create() {
 }
 
 function update() {
-  //Als game over actief is, vermijd beweging.
+  //If game over is active, avoid movement
   if (gameOverText) {
     return;
   }
@@ -110,22 +131,26 @@ function spawnCollectable(scene) {
   const randomy = Phaser.Math.Between(0, scene.sys.game.config.height);
 
   const food = scene.collectables.create(randomx, randomy, 'food');
-  food.setScale(0.05); //Verklein de collectables (erg) vanwege de asset die zo groot is en de player hun verkleinde size. 
+
+  //Downscale the foods by a lot as the image is very big and the default player is also downscaled by a lot.
+  food.setScale(0.05);
   food.setCircle(food.width / 2);
-  food.setTint(Phaser.Display.Color.RandomRGB(100, 255).color); //Geef food collectables een random kleur
+
+  //Give food image a random color
+  food.setTint(Phaser.Display.Color.RandomRGB(100, 255).color);
 }
 
 function spawnObstacle(scene) {
-  const safeZoneRadius = 250; //Straal ron speler waar geen obstakels mogen spawnen
-  const minDistanceBetweenObstacles = 200; //Minimale afstand tussen obstakels
+  const safeZoneRadius = 250; //Amount of space around player where obstacles cant spawn
+  const minDistanceBetweenObstacles = 200; //Minimum space between obstacles when spawning
 
-  //Set wat de center is voor beide assen
+  //Set and save centers
   const centerX = scene.sys.game.config.width / 2;
   const centerY = scene.sys.game.config.height / 2;
 
   let randomx, randomy, validPosition = false;
 
-  //Probeer tot we een geldige positie vinden (max 50 pogingen om vastlopen te voorkomen)
+  //Try to get a valid pos (max 50 tries to prevent freezing)
   for (let attempts = 0; attempts < 50 && !validPosition; attempts++) {
     randomx = Phaser.Math.Between(50, scene.sys.game.config.width - 50);
     randomy = Phaser.Math.Between(50, scene.sys.game.config.height - 50);
@@ -133,7 +158,7 @@ function spawnObstacle(scene) {
     const distanceToCenter = Phaser.Math.Distance.Between(randomx, randomy, centerX, centerY);
     if (distanceToCenter < safeZoneRadius) continue; // te dicht bij speler
 
-    //Check of het niet te dicht bij een bestaand obstakel is
+    //Check if the obstacle isn't too close to another obstacle
     let tooClose = false;
     scene.obstacles.getChildren().forEach(obstacle => {
       const obstacleDistance = Phaser.Math.Distance.Between(randomx, randomy, obstacle.x, obstacle.y);
@@ -152,19 +177,22 @@ function spawnObstacle(scene) {
 }
 
 function gameOver(scene) {
+  //Play hit sound
+  scene.hitSound.play();
+
   //Stop physics
   scene.physics.pause();
 
-  //Tint speler rood
+  //Change player color to red
   player.setTint(0xff0000);
 
-  //Voeg Game Over tekst toe
+  //Add game over text
   gameOverText = scene.add.text(scene.sys.game.config.width / 2, scene.sys.game.config.height / 2, 'GAME OVER', {
     fontSize: '64px',
     fill: '#ff0000'
   }).setOrigin(0.5);
 
-  //Herstart na 3 seconden
+  //Restart after 3 seconds
   scene.time.delayedCall(3000, () => {
     scene.scene.restart();
     gameOverText = null;
