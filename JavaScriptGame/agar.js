@@ -23,6 +23,12 @@ const config = {
 let player;
 let pointer;
 let gameOverText;
+let timeText;
+
+let amountEaten = 0;
+let highestMass;
+let timeAlive = 0;
+let lastUpdate = Date.now();
 
 const game = new Phaser.Game(config);
 
@@ -36,6 +42,10 @@ function preload(){
   this.load.audio('consume', 'assets/sounds/FoodConsume.wav');
   this.load.audio('hit', 'assets/sounds/PlayerHit.wav');
   this.load.audio('music', 'assets/sounds/SewerCity.wav');
+
+  timeAlive = 0;
+  amountEaten = 0;
+  highestMass = 0;
 }
 
 function create() {
@@ -84,6 +94,8 @@ function create() {
     //Remove food item
     collectable.destroy();
 
+    amountEaten++;
+
     //Play eat sound
     this.consumeSound.play();
 
@@ -100,6 +112,12 @@ function create() {
 
   //Save reference to the mouse
   pointer = this.input.activePointer;
+
+
+  timeText = this.add.text(this.scale.width / 2, 20, "Time alive: 0", {
+  fontSize: "32px",
+  fill: "#ffffff"
+}).setOrigin(0.5, 0);
 }
 
 function update() {
@@ -107,6 +125,17 @@ function update() {
   if (gameOverText) {
     return;
   }
+
+  const now = Date.now();
+  const deltaTime = (now - lastUpdate) / 1000; // seconds
+  lastUpdate = now;
+
+  // Update survival time
+  timeAlive += deltaTime;
+
+  // Update text (don’t recreate it!)
+  timeText.setText(`Time alive: ${Math.floor(timeAlive)}`);
+
 
   const speed = 5;
 
@@ -179,6 +208,9 @@ function spawnObstacle(scene) {
 function gameOver(scene) {
   //Play hit sound
   scene.hitSound.play();
+
+  //Set final size
+  highestMass = player.scale;
 
   //Stop physics
   scene.physics.pause();
