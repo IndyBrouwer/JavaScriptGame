@@ -23,6 +23,12 @@ const config = {
 let player;
 let pointer;
 let gameOverText;
+let timeText;
+
+let amountEaten = 0;
+let highestMass;
+let timeAlive = 0;
+let lastUpdate = Date.now();
 
 const game = new Phaser.Game(config);
 
@@ -36,6 +42,10 @@ function preload(){
   this.load.audio('consume', 'assets/sounds/FoodConsume.wav');
   this.load.audio('hit', 'assets/sounds/PlayerHit.wav');
   this.load.audio('music', 'assets/sounds/SewerCity.wav');
+
+  timeAlive = 0;
+  amountEaten = 0;
+  highestMass = 0;
 }
 
 function create() {
@@ -84,6 +94,8 @@ function create() {
     //Remove food item
     collectable.destroy();
 
+    amountEaten++;
+
     //Play eat sound
     this.consumeSound.play();
 
@@ -100,6 +112,12 @@ function create() {
 
   //Save reference to the mouse
   pointer = this.input.activePointer;
+
+
+  timeText = this.add.text(this.scale.width / 2, 20, "Time alive: 0", {
+  fontSize: "32px",
+  fill: "#ffffff"
+}).setOrigin(0.5, 0);
 }
 
 function update() {
@@ -107,6 +125,17 @@ function update() {
   if (gameOverText) {
     return;
   }
+
+  const now = Date.now();
+  const deltaTime = (now - lastUpdate) / 1000; // seconds
+  lastUpdate = now;
+
+  // Update survival time
+  timeAlive += deltaTime;
+
+  // Update text (don’t recreate it!)
+  timeText.setText(`Time alive: ${Math.floor(timeAlive)}`);
+
 
   const speed = 5;
 
@@ -176,9 +205,12 @@ function spawnObstacle(scene) {
   }
 }
 
-function gameOver(scene) {
+async function gameOver(scene) {
   //Play hit sound
   scene.hitSound.play();
+
+  //Set final size
+  highestMass = player.scale;
 
   //Stop physics
   scene.physics.pause();
@@ -197,4 +229,77 @@ function gameOver(scene) {
     scene.scene.restart();
     gameOverText = null;
   });
+
+  // 🟢 Highscore opslaan
+  const scoresData = await loadHighScores();
+
+  scoresData.HighScores.push({
+    PlayerRank: 0,
+    PlayerName: "Player",
+    HighestMass: Number(highestMass.toFixed(3)),
+    FoodEaten: amountEaten,
+    TimeSurvived: timeAlive.toFixed(2)
+  });
+
+  scoresData.HighScores.sort((a, b) => b.HighestMass - a.HighestMass);
+  scoresData.HighScores = scoresData.HighScores.map((s, i) => ({
+    ...s,
+    PlayerRank: i + 1
+  }));
+  scoresData.HighScores = scoresData.HighScores.slice(0, 10);
+  await saveHighScores(scoresData);
+
+  console.log("Highscores opgeslagen:", scoresData);
+
+  // Toon top 5 highscores op scherm
+  const highscoreText = scene.add.text(scene.scale.width / 2, scene.scale.height / 2 + 100, 
+    formatHighScores(scoresData), {
+    fontSize: '24px',
+    fill: '#ffffff',
+    align: 'center'
+  }).setOrigin(0.5);
+
+  scene.time.delayedCall(3000, () => {
+    scene.scene.restart();
+    gameOverText = null;
+    highscoreText.destroy();
+  });
+}
+
+
+async function loadHighScores() {
+  try {
+    const response = await fetch('../jsonzooi.php');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error loading highscores:', error);
+    return { HighScores: [] };
+  }
+}
+
+async function saveHighScores(data) {
+  try {
+    const response = await fetch('../jsonzooi.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    if (!result.success) {
+      console.error('Failed to save highscores');
+    }
+  } catch (error) {
+    console.error('Error saving highscores:', error);
+  }
+}
+
+function formatHighScores(data) {
+  let text = "🏆 Top 5 Highscores 🏆\n\n";
+  data.HighScores.slice(0, 5).forEach(score => {
+    text += `${score.PlayerRank}. ${score.PlayerName} — Size: ${score.HighestMass}, Time: ${score.TimeSurvived}s\n`;
+  });
+  return text;
 }
