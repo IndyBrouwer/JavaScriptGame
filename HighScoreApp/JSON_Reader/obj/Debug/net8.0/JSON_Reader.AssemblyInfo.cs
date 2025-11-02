@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JSON_Reader")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0aeee8dba3a7516f100df517bf34c0c381ce1ba1")]
 [assembly: System.Reflection.AssemblyProductAttribute("JSON_Reader")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JSON_Reader")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

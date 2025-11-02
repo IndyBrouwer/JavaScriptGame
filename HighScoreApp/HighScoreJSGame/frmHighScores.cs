@@ -22,10 +22,6 @@ namespace HighScoreJSGame
             dgvHighScores.DataBindingComplete += dgvHighScores_DataBindingComplete;
         }
 
-        private void frmHighScores_Load(object sender, EventArgs e) {
-            // no actions needed on load right now
-        }
-
         private void dgvHighScores_DataBindingComplete(object? sender, DataGridViewBindingCompleteEventArgs e) {
             // format table after data binding is complete -- won't work properly if done before
             tableFormat();

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iG3O/vP/Fu0=",
+  "dgSpecHash": "zQEMfaY157Y=",
   "success": true,
-  "projectFilePath": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\C_Sharp\\JS_Game\\HighScoreJSGame\\HighScoreJSGame.csproj",
+  "projectFilePath": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\JavaScriptGame\\HighScoreApp\\HighScoreJSGame\\HighScoreJSGame.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sjors\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
   ],
