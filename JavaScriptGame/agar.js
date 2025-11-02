@@ -14,6 +14,12 @@ const config = {
   }
 };
 
+
+// let → Can reassign the reference
+
+// const → Reference can’t be reassigned
+
+
 let player;
 let pointer;
 let gameOverText;
@@ -25,6 +31,7 @@ let timeAlive = 0;
 let lastUpdate = Date.now();
 
 const game = new Phaser.Game(config);
+
 
 function preload(){
   this.load.image('player', 'assets/WhiteCircle.png');
@@ -44,102 +51,143 @@ function preload(){
 function create() {
   this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, 'background')
       .setOrigin(0);
+
   this.background.setTint(0x555555);
 
   //Add sounds
   this.consumeSound = this.sound.add('consume', { volume: 1 });
   this.hitSound = this.sound.add('hit', { volume: 1 });
-  this.loopMusic = this.sound.add('music', { volume: 0.5, loop: true });
+  this.loopMusic = this.sound.add('music', { volume: 0.5, loop: true })
+
+  //Start looping background music
   this.loopMusic.play();
   
-  //Add player
+  //Add player in the middle of screen
   player = this.physics.add.image(640, 360, 'player');
+
+  //Change size of the image
   player.setScale(0.1);
   player.setCircle(player.width / 2);
 
-  //Groups
+
+  //Add group for collectables
   this.collectables = this.physics.add.group();
+
+  //Add group for obstacles
   this.obstacles = this.physics.add.group();
 
-  //Spawn food
+
+  //Spawn food collectables
   this.time.addEvent({
     delay: 2000,
     callback: () => spawnCollectable(this),
     loop: true
   });
 
-  //Spawn obstacles
+  //Spawn obstacles (4 as of now)
   for (let i = 0; i < 4; i++) {
     spawnObstacle(this);
   }
 
-  //Collisions
+  //Overlap with consumables
   this.physics.add.overlap(player, this.collectables, (player, collectable) => {
+    //Remove food item
     collectable.destroy();
+
     amountEaten++;
+
+    //Play eat sound
     this.consumeSound.play();
+
+    //Increase player slightly on every consume
     player.setScale(player.scale + 0.005);
   });
 
+
+  //Overlap with obstacles
   this.physics.add.overlap(player, this.obstacles, () => {
     gameOver(this);
   });
 
+
+  //Save reference to the mouse
   pointer = this.input.activePointer;
 
+
   timeText = this.add.text(this.scale.width / 2, 20, "Time alive: 0", {
-    fontSize: "32px",
-    fill: "#ffffff"
-  }).setOrigin(0.5, 0);
+  fontSize: "32px",
+  fill: "#ffffff"
+}).setOrigin(0.5, 0);
 }
 
 function update() {
-  if (gameOverText) return;
+  //If game over is active, avoid movement
+  if (gameOverText) {
+    return;
+  }
 
   const now = Date.now();
-  const deltaTime = (now - lastUpdate) / 1000;
+  const deltaTime = (now - lastUpdate) / 1000; // seconds
   lastUpdate = now;
+
+  // Update survival time
   timeAlive += deltaTime;
+
+  // Update text (don’t recreate it!)
   timeText.setText(`Time alive: ${Math.floor(timeAlive)}`);
 
+
   const speed = 5;
-  const dx = pointer.x - player.x;
-  const dy = pointer.y - player.y;
-  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  const differencex = pointer.x - player.x;
+  const differencey = pointer.y - player.y;
+
+  //Calculate square root
+  const distance = Math.sqrt(differencex * differencex + differencey * differencey);
 
   if (distance > 1) {
-    player.x += dx * 0.1 * speed * (1 / distance);
-    player.y += dy * 0.1 * speed * (1 / distance);
+    player.x += differencex * 0.1 * speed * (1 / distance);
+    player.y += differencey * 0.1 * speed * (1 / distance);
   }
 }
 
 function spawnCollectable(scene) {
-  if (gameOverText) return;
+  if (gameOverText){
+    return;
+  }
 
   const randomx = Phaser.Math.Between(0, scene.sys.game.config.width);
   const randomy = Phaser.Math.Between(0, scene.sys.game.config.height);
+
   const food = scene.collectables.create(randomx, randomy, 'food');
 
+  //Downscale the foods by a lot as the image is very big and the default player is also downscaled by a lot.
   food.setScale(0.05);
   food.setCircle(food.width / 2);
+
+  //Give food image a random color
   food.setTint(Phaser.Display.Color.RandomRGB(100, 255).color);
 }
 
 function spawnObstacle(scene) {
-  const safeZoneRadius = 250;
-  const minDistanceBetweenObstacles = 200;
+  const safeZoneRadius = 250; //Amount of space around player where obstacles cant spawn
+  const minDistanceBetweenObstacles = 200; //Minimum space between obstacles when spawning
 
+  //Set and save centers
   const centerX = scene.sys.game.config.width / 2;
   const centerY = scene.sys.game.config.height / 2;
+
   let randomx, randomy, validPosition = false;
 
+  //Try to get a valid pos (max 50 tries to prevent freezing)
   for (let attempts = 0; attempts < 50 && !validPosition; attempts++) {
     randomx = Phaser.Math.Between(50, scene.sys.game.config.width - 50);
     randomy = Phaser.Math.Between(50, scene.sys.game.config.height - 50);
 
     const distanceToCenter = Phaser.Math.Distance.Between(randomx, randomy, centerX, centerY);
-    if (distanceToCenter < safeZoneRadius) continue;
+    if (distanceToCenter < safeZoneRadius) continue; // te dicht bij speler
 
+    //Check if the obstacle isn't too close to another obstacle
     let tooClose = false;
     scene.obstacles.getChildren().forEach(obstacle => {
       const obstacleDistance = Phaser.Math.Distance.Between(randomx, randomy, obstacle.x, obstacle.y);
@@ -158,70 +206,27 @@ function spawnObstacle(scene) {
 }
 
 function gameOver(scene) {
+  //Play hit sound
   scene.hitSound.play();
+
+  //Set final size
   highestMass = player.scale;
+
+  //Stop physics
   scene.physics.pause();
+
+  //Change player color to red
   player.setTint(0xff0000);
 
+  //Add game over text
   gameOverText = scene.add.text(scene.sys.game.config.width / 2, scene.sys.game.config.height / 2, 'GAME OVER', {
     fontSize: '64px',
     fill: '#ff0000'
   }).setOrigin(0.5);
 
-  // 🟢 Highscore opslaan
-  const scoresData = loadHighScores();
-
-  scoresData.HighScores.push({
-    PlayerRank: 0,
-    PlayerName: "Player",
-    HighestMass: Number(highestMass.toFixed(3)),
-    FoodEaten: amountEaten,
-    TimeSurvived: timeAlive.toFixed(2)
-  });
-
-  scoresData.HighScores.sort((a, b) => b.HighestMass - a.HighestMass);
-  scoresData.HighScores = scoresData.HighScores.map((s, i) => ({
-    ...s,
-    PlayerRank: i + 1
-  }));
-  scoresData.HighScores = scoresData.HighScores.slice(0, 10);
-  saveHighScores(scoresData);
-
-  console.log("Highscores opgeslagen:", scoresData);
-
-  // Toon top 5 highscores op scherm
-  const highscoreText = scene.add.text(scene.scale.width / 2, scene.scale.height / 2 + 100, 
-    formatHighScores(scoresData), {
-    fontSize: '24px',
-    fill: '#ffffff',
-    align: 'center'
-  }).setOrigin(0.5);
-
+  //Restart after 3 seconds
   scene.time.delayedCall(3000, () => {
     scene.scene.restart();
     gameOverText = null;
-    highscoreText.destroy();
   });
-}
-
-// ---------------- JSON / LocalStorage functies ----------------
-
-function loadHighScores() {
-  const saved = localStorage.getItem('HighScores');
-  if (saved) {
-    return JSON.parse(saved);
-  }
-  return { HighScores: [] };
-}
-
-function saveHighScores(data) {
-  localStorage.setItem('HighScores', JSON.stringify(data, null, 2));
-}
-
-function formatHighScores(data) {
-  let text = "🏆 Top 5 Highscores 🏆\n\n";
-  data.HighScores.slice(0, 5).forEach(score => {
-    text += `${score.PlayerRank}. ${score.PlayerName} — Size: ${score.HighestMass}, Time: ${score.TimeSurvived}s\n`;
-  });
-  return text;
 }
