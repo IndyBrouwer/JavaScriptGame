@@ -10,3 +10,16 @@ C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\C_Sharp\JS_Game\JSON_Reader\o
 C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\C_Sharp\JS_Game\JSON_Reader\obj\Debug\net8.0\refint\JSON_Reader.dll
 C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\C_Sharp\JS_Game\JSON_Reader\obj\Debug\net8.0\JSON_Reader.pdb
 C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\C_Sharp\JS_Game\JSON_Reader\obj\Debug\net8.0\ref\JSON_Reader.dll
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\bin\Debug\net8.0\JSON_Reader.deps.json
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\bin\Debug\net8.0\JSON_Reader.dll
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\bin\Debug\net8.0\JSON_Reader.pdb
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\obj\Debug\net8.0\JSON_Reader.csproj.AssemblyReference.cache
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\obj\Debug\net8.0\JSON_Reader.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\obj\Debug\net8.0\JSON_Reader.AssemblyInfoInputs.cache
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\obj\Debug\net8.0\JSON_Reader.AssemblyInfo.cs
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\obj\Debug\net8.0\JSON_Reader.csproj.CoreCompileInputs.cache
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\obj\Debug\net8.0\JSON_Reader.sourcelink.json
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\obj\Debug\net8.0\JSON_Reader.dll
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\obj\Debug\net8.0\refint\JSON_Reader.dll
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\obj\Debug\net8.0\JSON_Reader.pdb
+C:\Users\sjors\OneDrive\Documenten\TechNova\Jaar_2\JavaScriptGame\HighScoreApp\JSON_Reader\obj\Debug\net8.0\ref\JSON_Reader.dll

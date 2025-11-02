@@ -79,11 +79,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\C_Sharp\\JS_Game\\HighScoreJSGame\\HighScoreJSGame.csproj",
+      "projectUniqueName": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\JavaScriptGame\\HighScoreApp\\HighScoreJSGame\\HighScoreJSGame.csproj",
       "projectName": "HighScoreJSGame",
-      "projectPath": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\C_Sharp\\JS_Game\\HighScoreJSGame\\HighScoreJSGame.csproj",
+      "projectPath": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\JavaScriptGame\\HighScoreApp\\HighScoreJSGame\\HighScoreJSGame.csproj",
       "packagesPath": "C:\\Users\\sjors\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\C_Sharp\\JS_Game\\HighScoreJSGame\\obj\\",
+      "outputPath": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\JavaScriptGame\\HighScoreApp\\HighScoreJSGame\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -104,8 +104,8 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\C_Sharp\\JS_Game\\JSON_Reader\\JSON_Reader.csproj": {
-              "projectPath": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\C_Sharp\\JS_Game\\JSON_Reader\\JSON_Reader.csproj"
+            "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\JavaScriptGame\\HighScoreApp\\JSON_Reader\\JSON_Reader.csproj": {
+              "projectPath": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\JavaScriptGame\\HighScoreApp\\JSON_Reader\\JSON_Reader.csproj"
             }
           }
         }
