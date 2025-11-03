@@ -16,7 +16,6 @@ namespace HighScoreJSGame
 
             string jsonString = JSON_Read.writeJSON();
             tableFill(jsonString);
-            label1.Text = jsonString;
 
             // make sure binding is complete before formatting
             dgvHighScores.DataBindingComplete += dgvHighScores_DataBindingComplete;
@@ -29,12 +28,24 @@ namespace HighScoreJSGame
 
         private void tableFill(string jsonString) {
             // TEMP parameter jsonString, later read from file in readJSON() func.
-            List<HighScores> tableData = JSON_Read.readJSON(jsonString);
+            List<HighScore> tableData = JSON_Read.readJSON(jsonString);
 
-            tableData = (tableData.OrderByDescending(highScores => highScores.HighestMass)).ToList<HighScores>(); // order by highest mass
+            tableData = (tableData.OrderByDescending(highScore => highScore.HighestMass)).ToList<HighScore>(); // order by highest mass
             addRankToList(tableData); // add rank after ordering list
 
+            if (tableData.Count == 0) {
+                lblError.Text = JSON_Read.GiveDataFetchingError();
+            }
+
             dgvHighScores.DataSource = tableData;
+        }
+
+        private List<HighScore> addRankToList(List<HighScore> tableData) {
+            for (int i = 0; i < tableData.Count; i++) {
+                tableData[i].PlayerRank = i + 1;
+            }
+
+            return tableData;
         }
 
         private void tableFormat() {
@@ -87,12 +98,5 @@ namespace HighScoreJSGame
         }
 
 
-        private List<HighScores> addRankToList(List<HighScores> tableData) {
-            for (int i = 0; i < tableData.Count; i++) {
-                tableData[i].PlayerRank = i + 1;
-            }
-
-            return tableData;
-        }
     }
 }

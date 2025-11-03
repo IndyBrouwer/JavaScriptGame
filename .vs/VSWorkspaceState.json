@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\HighScoreApp"
+    "\\HighScoreApp",
+    "\\HighScoreApp\\HighScoreJSGame",
+    "\\HighScoreApp\\JSON_Reader"
   ],
-  "SelectedNode": "\\HighScoreApp",
+  "SelectedNode": "\\HighScoreApp\\HighScoreJSGame\\JS_Game.sln",
   "PreviewInSolutionExplorer": false
 }

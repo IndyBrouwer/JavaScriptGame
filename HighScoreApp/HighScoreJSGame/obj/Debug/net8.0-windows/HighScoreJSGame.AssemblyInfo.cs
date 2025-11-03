@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HighScoreJSGame")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0aeee8dba3a7516f100df517bf34c0c381ce1ba1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+95579604293839c59a190a70b02dc0804495180a")]
 [assembly: System.Reflection.AssemblyProductAttribute("HighScoreJSGame")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HighScoreJSGame")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
