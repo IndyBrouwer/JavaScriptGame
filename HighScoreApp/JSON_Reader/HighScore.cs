@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JSON_Reader {
-    public class HighScores {
+    public class HighScore {
         private int _playerRank;
         private string _playerName;
         private int _highestMass;
@@ -20,7 +20,7 @@ namespace JSON_Reader {
         public TimeOnly TimeSurvived { get => _timeSurvived; set => _timeSurvived = value; }
 
 
-        public HighScores(string playerName, int foodEaten, int highestMass, TimeOnly timeSurvived) {
+        public HighScore(string playerName, int foodEaten, int highestMass, TimeOnly timeSurvived) {
             this.PlayerRank = 0; // Default rank, to be set later
             this.PlayerName = playerName;
             this.HighestMass = highestMass;
@@ -34,8 +34,8 @@ namespace JSON_Reader {
 
 
     public class HighScoresList {
-        private List<HighScores> _highScores;
+        private List<HighScore> _highScores;
 
-        public List<HighScores> HighScores { get => _highScores; set => _highScores = value; }
+        public List<HighScore> HighScores { get => _highScores; set => _highScores = value; }
     }
 }
