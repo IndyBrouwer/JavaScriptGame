@@ -1,3 +1,1 @@
-{
-  "HighScores": []
-}
+{"HighScores":[{"PlayerRank":1,"PlayerName":"Player","HighestMass":0.105,"FoodEaten":1,"TimeSurvived":"102.05"},{"PlayerRank":2,"PlayerName":"Player","HighestMass":0.105,"FoodEaten":1,"TimeSurvived":"18.57"},{"PlayerRank":3,"PlayerName":"Player","HighestMass":0.1,"FoodEaten":0,"TimeSurvived":"8.21"},{"PlayerRank":4,"PlayerName":"Player","HighestMass":0.1,"FoodEaten":0,"TimeSurvived":"8.42"},{"PlayerRank":5,"PlayerName":"Player","HighestMass":0.1,"FoodEaten":0,"TimeSurvived":"2.60"},{"PlayerRank":6,"PlayerName":"Player","HighestMass":0.1,"FoodEaten":0,"TimeSurvived":"2.66"},{"PlayerRank":7,"PlayerName":"Player","HighestMass":0.1,"FoodEaten":0,"TimeSurvived":"4.06"},{"PlayerRank":8,"PlayerName":"Player","HighestMass":0.1,"FoodEaten":0,"TimeSurvived":"3.91"}]}
