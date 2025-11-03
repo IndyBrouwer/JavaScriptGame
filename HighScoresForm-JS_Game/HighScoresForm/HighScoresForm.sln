@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HighScoresForm", "HighScoresForm.csproj", "{9E9C929E-17EE-4C66-8F0A-6578AB94CD31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSON_Reader", "..\JSON_Reader\JSON_Reader.csproj", "{D13E4130-5D50-4F03-B28C-89DF71C02B2A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E9C929E-17EE-4C66-8F0A-6578AB94CD31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E9C929E-17EE-4C66-8F0A-6578AB94CD31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E9C929E-17EE-4C66-8F0A-6578AB94CD31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E9C929E-17EE-4C66-8F0A-6578AB94CD31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D13E4130-5D50-4F03-B28C-89DF71C02B2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D13E4130-5D50-4F03-B28C-89DF71C02B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D13E4130-5D50-4F03-B28C-89DF71C02B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D13E4130-5D50-4F03-B28C-89DF71C02B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5353F1CE-34B7-47BC-AF19-6ACA20452E89}
+	EndGlobalSection
+EndGlobal
