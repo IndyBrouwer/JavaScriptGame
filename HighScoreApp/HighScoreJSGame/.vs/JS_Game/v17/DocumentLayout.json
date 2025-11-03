@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\JavaScriptGame\\HighScoreApp\\HighScoreJSGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\C_Sharp\\JS_Game\\JSON_Reader\\JSON_Read.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{295994EA-BA2C-4241-86B2-7E08F7F3AB71}|HighScoreJSGame.csproj|c:\\users\\sjors\\onedrive\\documenten\\technova\\jaar_2\\javascriptgame\\highscoreapp\\highscorejsgame\\frmhighscores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{295994EA-BA2C-4241-86B2-7E08F7F3AB71}|HighScoreJSGame.csproj|solutionrelative:frmhighscores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\C_Sharp\\JS_Game\\JSON_Reader\\JSON_Read.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{295994EA-BA2C-4241-86B2-7E08F7F3AB71}|HighScoreJSGame.csproj|c:\\users\\sjors\\onedrive\\documenten\\technova\\jaar_2\\javascriptgame\\highscoreapp\\highscorejsgame\\frmhighscores.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,7 +31,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -60,13 +60,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "frmHighScores.cs",
               "DocumentMoniker": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\JavaScriptGame\\HighScoreApp\\HighScoreJSGame\\frmHighScores.cs",
               "RelativeDocumentMoniker": "frmHighScores.cs",
               "ToolTip": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\JavaScriptGame\\HighScoreApp\\HighScoreJSGame\\frmHighScores.cs",
               "RelativeToolTip": "frmHighScores.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACIAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-15T10:17:18.325Z",
               "EditorCaption": ""
@@ -81,12 +81,11 @@
               "RelativeToolTip": "..\\JSON_Reader\\HighScores.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-02T20:59:15.526Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-02T20:59:15.526Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "JSON_Read.cs",
               "DocumentMoniker": "C:\\Users\\sjors\\OneDrive\\Documenten\\TechNova\\Jaar_2\\C_Sharp\\JS_Game\\JSON_Reader\\JSON_Read.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\C_Sharp\\JS_Game\\JSON_Reader\\JSON_Read.cs",
